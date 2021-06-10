@@ -1,0 +1,4 @@
+20001;Gaseosa - Pepsi Cola;2.5;100
+20002;Galletas - Soda;0.5;100
+20003;Gaseosa - Fanta;2.5;200
+20004;Tragos-Don cesilio;100.0;20
