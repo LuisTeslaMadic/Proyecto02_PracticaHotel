@@ -123,9 +123,14 @@ public class JDialogBungalow extends JDialog implements ActionListener {
 		getContentPane().add(cboCategoria);
 		
 		cboEstado = new JComboBox<String>();
-		cboEstado.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+		cboEstado.setBorder(null);
+		cboEstado.setFocusable(false);
+		cboEstado.setEnabled(false);
+		cboEstado.setBackground(Color.WHITE);
+		cboEstado.setForeground(Color.DARK_GRAY);
+		cboEstado.setFont(new Font("Segoe UI Black", Font.BOLD | Font.ITALIC, 15));
 		cboEstado.setModel(new DefaultComboBoxModel<String>(new String[] {"Libre", "Ocupado"}));
-		cboEstado.setBounds(162, 191, 130, 20);
+		cboEstado.setBounds(162, 188, 130, 23);
 		getContentPane().add(cboEstado);
 		
 		btnAceptar = new JButton("Aceptar");

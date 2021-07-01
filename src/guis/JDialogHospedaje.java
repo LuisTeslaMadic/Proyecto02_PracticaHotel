@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -14,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -27,7 +30,9 @@ import arreglos.ArregloBungalow;
 import arreglos.ArregloHospedaje;
 import arreglos.ArregloIngreso;
 import clases.Bungalow;
+import clases.Hospedaje;
 import clases.Ingreso;
+import com.toedter.components.JSpinField;
 
 public class JDialogHospedaje extends JDialog implements ActionListener, MouseListener {
 	/**
@@ -38,16 +43,13 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 	private JTextField txtCodigoHospedaje;
 	private JButton btnAgregarConsumo;
 	private JLabel lblCategoriaDeBungalow;
-	private JComboBox<String> cboIngreso;
+	private JComboBox<Integer> cboIngreso;
 	private JLabel lblCodigoDeBungalow;
-	private JButton btnModificar;
-	private JButton btnEliminar;
 	private JScrollPane scrollPane;
 	private JTable tblHospedaje;
-	private JButton btnConsultar;
 	private JComboBox<Integer> cboNumeroBungalow;
 	private JLabel lblCodigoIngreso;
-	private JComboBox<Integer> cboCategoriaBungalow;
+	private JComboBox<String> cboCategoriaBungalow;
 	private JLabel lblFechaDeSalida;
 	private JLabel lblHoraDeSalida;
 	private JLabel lblCosto;
@@ -58,9 +60,6 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 	private JComboBox<String> cboEstado;
 	private DefaultTableModel modelo;
 	private JTableHeader cabecera;
-	private JButton btnAceptar;
-	private JButton btnVolver;
-	private JButton btnBuscar;
 	ArregloHospedaje ah = new ArregloHospedaje();
     ArregloIngreso   ai = new ArregloIngreso();
     ArregloBungalow  ab = new ArregloBungalow();
@@ -81,6 +80,7 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 	 * Create the dialog.
 	 */
 	public JDialogHospedaje() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(JDialogHospedaje.class.getResource("/imagenes/home.png")));
 		setTitle("Hospedaje Socio");
 		setBounds(100, 100, 949, 629);
@@ -106,7 +106,7 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		btnAgregarConsumo.setForeground(Color.DARK_GRAY);
 		btnAgregarConsumo.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
 		btnAgregarConsumo.setBackground(Color.WHITE);
-		btnAgregarConsumo.setBounds(792, 7, 120, 30);
+		btnAgregarConsumo.setBounds(789, 10, 134, 46);
 		getContentPane().add(btnAgregarConsumo);
 		
 		lblCategoriaDeBungalow = new JLabel("Categoria de Bungalow :");
@@ -115,7 +115,8 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		lblCategoriaDeBungalow.setBounds(10, 90, 158, 25);
 		getContentPane().add(lblCategoriaDeBungalow);
 		
-		cboIngreso = new JComboBox<String>();
+		cboIngreso = new JComboBox<Integer>();
+		cboIngreso.addActionListener(this);
 		cboIngreso.setBackground(Color.WHITE);
 		cboIngreso.setForeground(Color.BLACK);
 		cboIngreso.setFont(new Font("Segoe UI", Font.ITALIC, 13));
@@ -128,39 +129,13 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		lblCodigoDeBungalow.setBounds(10, 130, 167, 25);
 		getContentPane().add(lblCodigoDeBungalow);
 		
-		btnModificar = new JButton("Modificar");
-		btnModificar.addActionListener(this);
-		btnModificar.setIcon(new ImageIcon(JDialogHospedaje.class.getResource("/imagenes/edit.png")));
-		btnModificar.setForeground(Color.DARK_GRAY);
-		btnModificar.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
-		btnModificar.setBackground(Color.WHITE);
-		btnModificar.setBounds(792, 87, 120, 30);
-		getContentPane().add(btnModificar);
-		
-		btnEliminar = new JButton("Eliminar");
-		btnEliminar.addActionListener(this);
-		btnEliminar.setIcon(new ImageIcon(JDialogHospedaje.class.getResource("/imagenes/x.png")));
-		btnEliminar.setForeground(Color.DARK_GRAY);
-		btnEliminar.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
-		btnEliminar.setBackground(Color.WHITE);
-		btnEliminar.setBounds(792, 127, 120, 30);
-		getContentPane().add(btnEliminar);
-		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 339, 913, 240);
 		getContentPane().add(scrollPane);
 		
 		tblHospedaje = new JTable();
+		tblHospedaje.setFont(new Font("Segoe UI", Font.ITALIC, 13));
 		scrollPane.setViewportView(tblHospedaje);
-		
-		btnConsultar = new JButton("Consultar");
-		btnConsultar.addActionListener(this);
-		btnConsultar.setIcon(new ImageIcon(JDialogHospedaje.class.getResource("/imagenes/search.png")));
-		btnConsultar.setForeground(Color.DARK_GRAY);
-		btnConsultar.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
-		btnConsultar.setBackground(Color.WHITE);
-		btnConsultar.setBounds(792, 47, 120, 30);
-		getContentPane().add(btnConsultar);
 		
 		cboNumeroBungalow = new JComboBox();
 		cboNumeroBungalow.setBackground(Color.WHITE);
@@ -175,9 +150,9 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		lblCodigoIngreso.setBounds(10, 50, 167, 25);
 		getContentPane().add(lblCodigoIngreso);
 		
-		cboCategoriaBungalow = new JComboBox();
+		cboCategoriaBungalow = new JComboBox<String>();
 		cboCategoriaBungalow.addActionListener(this);
-		cboCategoriaBungalow.setModel(new DefaultComboBoxModel(new String[] {"Simple", "Doble", "Familiar"}));
+		cboCategoriaBungalow.setModel(new DefaultComboBoxModel<String>(new String[] {"Simple", "Doble", "Familiar"}));
 		cboCategoriaBungalow.setBackground(Color.WHITE);
 		cboCategoriaBungalow.setForeground(Color.BLACK);
 		cboCategoriaBungalow.setFont(new Font("Segoe UI", Font.ITALIC, 13));
@@ -211,6 +186,9 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		dtFechaSalida = new JDateChooser();
 		dtFechaSalida.setBounds(180, 166, 183, 20);
 		getContentPane().add(dtFechaSalida);
+		dtFechaSalida.setDateFormatString("dd/MM/yyyy");
+		dtFechaSalida.setForeground(Color.DARK_GRAY);
+		dtFechaSalida.setFont(new Font("Segoe UI",Font.ITALIC, 13));
 		
 		txtHora = new JTextField();
 		txtHora.addMouseListener(this);
@@ -221,13 +199,15 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		getContentPane().add(txtHora);
 		
 		txtCosto = new JTextField();
+		txtCosto.setEditable(false);
 		txtCosto.setFont(new Font("Segoe UI", Font.ITALIC, 13));
 		txtCosto.setColumns(10);
 		txtCosto.setBounds(180, 250, 183, 20);
 		getContentPane().add(txtCosto);
 		
 		cboEstado = new JComboBox();
-		cboEstado.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+		cboEstado.setEnabled(false);
+		cboEstado.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 15));
 		cboEstado.setModel(new DefaultComboBoxModel(new String[] {"Pendiente", "Pagado"}));
 		cboEstado.setBackground(Color.WHITE);
 		cboEstado.setBounds(180, 288, 183, 22);
@@ -242,80 +222,28 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		modelo.addColumn("Estado");
 		tblHospedaje.setModel(modelo);
 		
-		btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(this);
-		btnAceptar.setIcon(new ImageIcon(JDialogHospedaje.class.getResource("/imagenes/check (1).png")));
-		btnAceptar.setForeground(Color.DARK_GRAY);
-		btnAceptar.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
-		btnAceptar.setEnabled(false);
-		btnAceptar.setBackground(Color.WHITE);
-		btnAceptar.setBounds(392, 12, 122, 30);
-		getContentPane().add(btnAceptar);
-		
-		btnVolver = new JButton("Volver");
-		btnVolver.addActionListener(this);
-		btnVolver.setIcon(new ImageIcon(JDialogHospedaje.class.getResource("/imagenes/arrow-right.png")));
-		btnVolver.setForeground(Color.DARK_GRAY);
-		btnVolver.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
-		btnVolver.setBackground(Color.WHITE);
-		btnVolver.setBounds(392, 52, 122, 30);
-		getContentPane().add(btnVolver);
-		
-		btnBuscar = new JButton(" Buscar");
-		btnBuscar.addActionListener(this);
-		btnBuscar.setIcon(new ImageIcon(JDialogHospedaje.class.getResource("/imagenes/search.png")));
-		btnBuscar.setForeground(Color.DARK_GRAY);
-		btnBuscar.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
-		btnBuscar.setBackground(Color.WHITE);
-		btnBuscar.setBounds(392, 110, 122, 30);
-		getContentPane().add(btnBuscar);
-		
 		cabecera = tblHospedaje.getTableHeader();
 		cabecera.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
 		VolcadoCodigosIngreso();
 		ajustarAnchoColumnas();
+		AñadirItems();
+		Listar();
 	}
+	
+	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == cboIngreso) {
+			actionPerformedCboIngreso(e);
+		}
 		if (e.getSource() == cboCategoriaBungalow) {
 			actionPerformedCboCategoriaBungalow(e);
-		}
-		if (e.getSource() == btnBuscar) {
-			actionPerformedBtnBuscar(e);
-		}
-		if (e.getSource() == btnVolver) {
-			actionPerformedBtnVolver(e);
-		}
-		if (e.getSource() == btnAceptar) {
-			actionPerformedBtnAceptar(e);
-		}
-		
-		if (e.getSource() == btnEliminar) {
-			actionPerformedBtnEliminar(e);
-		}
-		if (e.getSource() == btnModificar) {
-			actionPerformedBtnModificar(e);
-		}
-		if (e.getSource() == btnConsultar) {
-			actionPerformedBtnConsultar(e);
 		}
 		if (e.getSource() == btnAgregarConsumo) {
 			actionPerformedBtnAgregarConsumo(e);
 		}
 	}
 	protected void actionPerformedBtnAgregarConsumo(ActionEvent e) {
-	}
-	protected void actionPerformedBtnConsultar(ActionEvent e) {
-	}
-	protected void actionPerformedBtnModificar(ActionEvent e) {
-	}
-	protected void actionPerformedBtnEliminar(ActionEvent e) {
-	}
-	
-	protected void actionPerformedBtnAceptar(ActionEvent e) {
-	}
-	protected void actionPerformedBtnVolver(ActionEvent e) {
-	}
-	protected void actionPerformedBtnBuscar(ActionEvent e) {
+	    Adicionar();      
 	}
 	public void mouseClicked(MouseEvent e) {
 		if (e.getSource() == txtHora) {
@@ -334,12 +262,16 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		txtHora.selectAll();
 		txtHora.requestFocus();
 	}
-	
+
+	protected void actionPerformedCboIngreso(ActionEvent e) {
+		Ingreso x = ai.BuscarCodigoIngreso(CapturarCodigoIngreso());
+		txtCosto.setText(x.getCostoIngreso()+"");
+	}
 	
 	void VolcadoCodigosIngreso() {
 		for(int i=0;i<ai.Tamaño();i++) {
 			Ingreso x = ai.Obtener(i);
-			cboIngreso.addItem(x.getCodigoIngreso()+"");;
+			cboIngreso.addItem(x.getCodigoIngreso());;
 		}
 	}
 	protected void actionPerformedCboCategoriaBungalow(ActionEvent e) {
@@ -352,7 +284,110 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 		}
 	}
 	
+	/*Metodos principales*/
+	
+	void AñadirItems() {
+		cboNumeroBungalow.removeAllItems();
+		for(int i=0;i<ab.Tamaño();i++) {
+			Bungalow x = ab.Obtener(i);
+			if(x.getEstado() == 0 && x.getCategoria() == cboCategoriaBungalow.getSelectedIndex()) {
+				cboNumeroBungalow.addItem(x.getNumeroBungalow());
+			}
+		}
+	}
+	
+	void Adicionar() {
+		try {
+			String fecha = CapturarFecha();
+			String horaSalida = CapturarHora();
+			if(horaSalida.matches("(1[0-2]|0?[1-9]):([0-5][0-9])")) {
+			    int codIngr    = CapturarCodigoIngreso();
+			   if(ah.CodigoIngreso(codIngr)==null) {
+				   int codigoHos  = CapturarCodigoHospedaje();
+				   int numeroBung = CapturarNumeroBungalow();
+				   double costo   = CapturarCosto();
+				   int    estado  = CapturarEstado();
+				   ah.Adicionar(new Hospedaje(codigoHos,codIngr,numeroBung,fecha,horaSalida,costo,estado));
+				   ah.GrabarHospedaje();
+				   Listar(); 
+			   }else {
+				   mensaje("El socio ya esta hospedado");
+			   }
+			}else {
+				mensaje("Debe colocar la hora con el formato hh:mm");
+			}
+		}catch(Exception e) {
+			mensaje("Debe colocar la fecha con el formato dd/mm/yyyy");
+		}
+	}
+	void Consultar() {
+		if(txtCodigoHospedaje.getText().equals("")) {
+			int cod = CapturarCodigoHospedaje();
+			Hospedaje x = ah.CodigoHospedaje(cod);
+			if(x != null) {
+				
+			}else {
+				mensaje("El codigo de hospedaje no existe");
+			}
+		}else {
+			mensaje("Coloque un código a buscar");
+		}
+	}
+	
+	//Metodos de captura
+	
+	int CapturarCodigoHospedaje() {
+		return Integer.parseInt(txtCodigoHospedaje.getText().trim());
+	}
+	
+	int CapturarCodigoIngreso() {
+		return Integer.parseInt(cboIngreso.getSelectedItem().toString());
+	}
+	int CapturarNumeroBungalow() {
+		return Integer.parseInt(cboNumeroBungalow.getSelectedItem().toString());
+	}
+	String CapturarFecha() {
+		return FormatoFecha(dtFechaSalida.getDate());
+	}
+	String CapturarHora() {
+		return txtHora.getText();
+	}
+	double CapturarCosto() {
+		return Double.parseDouble(txtCosto.getText());
+	}
+	int CapturarEstado() {
+		return cboEstado.getSelectedIndex();
+	}
+	
 	//Metodos complementarios
+	
+	void Listar() {
+		modelo.setRowCount(0);
+		for(int i=0;i<ah.Tamaño();i++) {
+			Hospedaje x = ah.Obtener(i);
+			Object[] fila = {x.getCodigoHospedaje(),
+					         x.getCodigoIngreso(),
+					         x.getNumeroBungalow(),
+					         x.getFechaSalida(),
+					         x.getHoraSalida(),
+					         x.getCostoHospedaje(),
+					         EstadoLetras(x.getEstado())};
+			modelo.addRow(fila);
+		}
+	}
+	
+	String FormatoFecha(Date fecha) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf.format(fecha);
+	}
+	
+    String EstadoLetras(int estado) {
+    	switch(estado) {
+    	case 0  : return "Pendiente";
+    	default : return "Pagado";
+    	}
+    }
+	
 	void ajustarAnchoColumnas() {
 		TableColumnModel tcm = tblHospedaje.getColumnModel();
 		tcm.getColumn(0).setPreferredWidth(anchoColumna(35));  
@@ -365,5 +400,9 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 	}
 	int anchoColumna(int porcentaje) {
 		return porcentaje * scrollPane.getWidth() / 100;
+	}
+	
+	void mensaje(String cad) {
+		JOptionPane.showMessageDialog(this, cad);
 	}
 }
