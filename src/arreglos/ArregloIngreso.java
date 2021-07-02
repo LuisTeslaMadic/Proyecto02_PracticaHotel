@@ -40,6 +40,7 @@ public class ArregloIngreso {
     	}
       return null;	
     }
+ 
     
     public Ingreso BuscarCodigoSocio(int cod){
     	for(int i=0;i<Tamaño();i++){

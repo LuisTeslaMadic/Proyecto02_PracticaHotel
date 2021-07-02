@@ -39,8 +39,8 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 	private JMenuItem mntmIngreso;
 	private JMenuItem mntmConsumo;
 	private JMenuItem mntmHospedaje;
-	private JMenuItem mntmNewMenuItem;
-	private JMenuItem mntmNewMenuItem_1;
+	private JMenuItem mntmIngresosConsumos;
+	private JMenuItem mntmHospedajes;
 	private JMenuItem mntmNewMenuItem_2;
 	private JMenuItem mntmNewMenuItem_3;
 	private JMenuItem mntmNewMenuItem_4;
@@ -158,15 +158,15 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 		mnPago.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
 		menuProyecto.add(mnPago);
 		
-		mntmNewMenuItem = new JMenuItem("Ingresos y consumos");
-		mntmNewMenuItem.addActionListener(this);
-		mntmNewMenuItem.setFont(new Font("Segoe UI", Font.ITALIC, 13));
-		mnPago.add(mntmNewMenuItem);
+		mntmIngresosConsumos = new JMenuItem("Ingresos y consumos");
+		mntmIngresosConsumos.addActionListener(this);
+		mntmIngresosConsumos.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+		mnPago.add(mntmIngresosConsumos);
 		
-		mntmNewMenuItem_1 = new JMenuItem("Hospedajes");
-		mntmNewMenuItem_1.addActionListener(this);
-		mntmNewMenuItem_1.setFont(new Font("Segoe UI", Font.ITALIC, 13));
-		mnPago.add(mntmNewMenuItem_1);
+		mntmHospedajes = new JMenuItem("Hospedajes");
+		mntmHospedajes.addActionListener(this);
+		mntmHospedajes.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+		mnPago.add(mntmHospedajes);
 		
 		mnReporte = new JMenu("Reporte");
 		mnReporte.setBorder(BorderFactory.createCompoundBorder(mnReporte.getBorder(),BorderFactory.createEmptyBorder(0, 10, 0,10)));
@@ -203,11 +203,11 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 		
 	}
 	public void actionPerformed(ActionEvent arg0) {
-		if (arg0.getSource() == mntmNewMenuItem_1) {
-			actionPerformedMntmNewMenuItem_1(arg0);
+		if (arg0.getSource() == mntmHospedajes) {
+			actionPerformedMntmHospedajes(arg0);
 		}
-		if (arg0.getSource() == mntmNewMenuItem) {
-			actionPerformedMntmNewMenuItem(arg0);
+		if (arg0.getSource() == mntmIngresosConsumos) {
+			actionPerformedMntmIngresosConsumos(arg0);
 		}
 		if (arg0.getSource() == mntmHospedaje) {
 			actionPerformedMntmHospedaje(arg0);
@@ -264,8 +264,14 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 		x.setLocationRelativeTo(this);
 		x.setVisible(true);
 	}
-	protected void actionPerformedMntmNewMenuItem(ActionEvent arg0) {
+	protected void actionPerformedMntmIngresosConsumos(ActionEvent arg0) {
+		JDialogPagoIngresosConsumos x = new JDialogPagoIngresosConsumos();
+		x.setLocationRelativeTo(this);
+		x.setVisible(true);
 	}
-	protected void actionPerformedMntmNewMenuItem_1(ActionEvent arg0) {
+	protected void actionPerformedMntmHospedajes(ActionEvent arg0) {
+		JDialogPagoHospedaje x = new JDialogPagoHospedaje();
+		x.setLocationRelativeTo(this);
+		x.setVisible(true);
 	}
 }

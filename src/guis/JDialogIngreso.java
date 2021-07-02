@@ -274,7 +274,7 @@ public class JDialogIngreso extends JDialog implements ActionListener {
 	void BuscarSocio(){
 		try{
 			String dni = JOptionPane.showInputDialog("Ingrese DNI del socio a buscar :").trim();
-			Socio  x      = as.BuscarDni(dni);
+			Socio  x      = as.BuscarDniSocio(dni);
 			if(x != null){
 				JOptionPane.showMessageDialog(this,"Encontrado correctamente!!");
 				cboCodigoSocio.setSelectedIndex(as.PosicionSocio(x));

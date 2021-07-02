@@ -55,14 +55,15 @@ public class Fecha {
 		 }
 	}
 	
-	public static int DiasTrascurridos(String FechaInicial,String FechaFinal){
-	     try{
-	    	 SimpleDateFormat adt= new SimpleDateFormat("dd/MM/yyyy");
-	    	 Date  fi = adt.parse(FechaInicial),ff = adt.parse(FechaFinal);
-	    	 //getTime te esta devolviendo el tiempo en milisegundos 
-	    	 return (int) (ff.getTime() - fi.getTime()) / 86400000;
-	     }catch(Exception e){
-	    	 return 0;
-	     }
+	public static int diasTranscurridos(String fechaInicial, String fechaFinal) {
+		try {
+			SimpleDateFormat adt = new SimpleDateFormat("dd/MM/yyyy");
+			Date fi = adt.parse(fechaInicial),
+			     ff = adt.parse(fechaFinal);
+			return (int) ((ff.getTime() - fi.getTime()) / 86400000);
+		}
+		catch (Exception e) {
+			return 0;
+		}
 	}
 }

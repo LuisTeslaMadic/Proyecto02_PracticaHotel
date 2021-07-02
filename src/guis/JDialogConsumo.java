@@ -31,16 +31,17 @@ import arreglos.ArregloSocio;
 import clases.Ingreso;
 import clases.Producto;
 import clases.Socio;
+import javax.swing.DefaultComboBoxModel;
 
 public class JDialogConsumo extends JDialog implements ActionListener {
 	private JLabel lblCodigoConsumo;
 	private JLabel lblCodigoSocio;
 	private JTextField txtCodigoConsumo;
-	private JComboBox cboSocio;
+	private JComboBox<Integer> cboSocio;
 	private JLabel lblProductos;
 	private JLabel lblNombreSocio;
 	private JTextField txtNombre;
-	private JComboBox cboProducto;
+	private JComboBox<String> cboProducto;
 	private JButton btnRevisarProductos;
 	private JButton btnAgregarConsumo;
 	private JButton btnBorrarConsumo;
@@ -97,13 +98,14 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 		getContentPane().add(lblCodigoSocio);
 		
 		txtCodigoConsumo = new JTextField();
+		txtCodigoConsumo.setEditable(false);
 		txtCodigoConsumo.setText("30001");
 		txtCodigoConsumo.setFont(new Font("Segoe UI", Font.ITALIC, 13));
 		txtCodigoConsumo.setColumns(10);
 		txtCodigoConsumo.setBounds(154, 27, 213, 20);
 		getContentPane().add(txtCodigoConsumo);
 		
-		cboSocio = new JComboBox();
+		cboSocio = new JComboBox<Integer>();
 		cboSocio.addActionListener(this);
 		cboSocio.setFont(new Font("Segoe UI", Font.ITALIC, 13));
 		cboSocio.setBounds(154, 75, 214, 20);
@@ -128,7 +130,7 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 		txtNombre.setBounds(154, 124, 213, 20);
 		getContentPane().add(txtNombre);
 		
-		cboProducto = new JComboBox();
+		cboProducto = new JComboBox<String>();
 		cboProducto.addActionListener(this);
 		cboProducto.setFont(new Font("Segoe UI", Font.ITALIC, 13));
 		cboProducto.setBounds(154, 173, 213, 20);
@@ -320,9 +322,9 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 	}
 	protected void actionPerformedCboSocio(ActionEvent arg0){
 		NombreSocio();
-		
-		CargarConsumo(CapturarCodigoSocio());
-		
+		int cod = CapturarCodigoSocio();
+		CargarConsumo(cod);
+		System.out.println(""+CapturarCodigoTabla());
 		if(modelo.getRowCount() > 0) {
 			txtCodigoConsumo.setText(""+CapturarCodigoTabla());
 		}else {
@@ -351,11 +353,11 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 						try{
 							int cantidad   = CapturarCantidad();
 							GrabarArchivo(CodigoConsumo,CodigoSocio,NombreSocio,producto,PrecioVenta,cantidad,ConsumoTotal());
-							if(modelo.getRowCount() > 0) {
-								txtCodigoConsumo.setText(""+CapturarCodigoTabla());
-							}else {
-								txtCodigoConsumo.setText(""+30001);
-							}
+							//if(modelo.getRowCount() > 0) {
+								txtCodigoConsumo.setText(""+(CapturarCodigoTabla()+1));
+							//}else {
+							//	txtCodigoConsumo.setText(""+30001);
+							//}
 							CargarConsumo(CodigoSocio);
 							//Mensaje("Adicionado");
 						}catch(Exception e){
@@ -406,46 +408,39 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 		
 	}
 	
-	void VerificacionExistenciaArchivo() {
-		
-	}
+	
 	
 	void CargarConsumo(int Codigo)  {
 		BufferedReader br = null;
-		String linea , NombreSocio,CodigoConsumo,CodigoSocio,producto,cantidad;
-		String[] s;
+		String linea ,CodigoConsumo,CodigoSocio,producto,cantidad;
+		String[] s = null ;
 		double total,precio,AcTotal = 0.0;
 		modelo.setRowCount(0);
 		try {
 			br = new BufferedReader(new FileReader((Codigo+30000)+".txt"));
 			while((linea = br.readLine()) != null) {
-				s = linea.split(";");
-				CodigoConsumo = s[0];
-				CodigoSocio = s[1];
-				producto    = s[2];
-				precio      = Double.parseDouble(s[3]);
-				cantidad    = s[4];
-				total       = Double.parseDouble(s[5]);
-				Object[] fila = {CodigoConsumo,
-						         CodigoSocio,
-						         producto,
-						         Formatos.FormatoMoneda(precio),
-						         cantidad,
-						         Formatos.FormatoMoneda(total)};
-				modelo.addRow(fila);
-				AcTotal +=total;
+				s = linea.split(";");	
+			 if(s.length ==6) {
+					CodigoConsumo = s[0];
+					CodigoSocio = s[1];
+					producto    = s[2];
+					precio      = Double.parseDouble(s[3]);
+					cantidad    = s[4];
+					total       = Double.parseDouble(s[5]);
+					Object[] fila = {CodigoConsumo,
+							         CodigoSocio,
+							         producto,
+							         Formatos.FormatoMoneda(precio),
+							         cantidad,
+							        Formatos.FormatoMoneda(total)};
+					modelo.addRow(fila);
+					AcTotal +=total;
+			 }
 			}
 			txtTotal.setText(Formatos.FormatoMoneda(AcTotal));
+			br.close();
 		}catch(IOException e) {
 			System.out.println(">> Error al abrir el archivo "+e);
-		}finally {
-			if(br != null) {
-				try {
-					br.close();
-				} catch (IOException e1) {
-					System.out.println(">> Error al cerrar el archivo");
-				}
-			}
 		}
 		
 	}
@@ -456,8 +451,7 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 	}
 	
 	int CapturarCodigoSocio(){
-		String CodigoSocio = cboSocio.getSelectedItem().toString().trim();
-		return Integer.parseInt(CodigoSocio);
+		return Integer.parseInt(cboSocio.getSelectedItem().toString());
 	}
 	
 	String CapturarNombreSocio(){
@@ -481,8 +475,8 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 		return Integer.parseInt(txtCantidad.getText().trim());
 	}
 	int CapturarCodigoTabla() {
-		int Codigo = Integer.parseInt(modelo.getValueAt(modelo.getRowCount()-1, 0).toString());
-		return Codigo+1;
+		int NumFilas = modelo.getRowCount()+1;
+		return 30000+NumFilas;
 	}
 	
 	//Metodos complementarios
@@ -500,9 +494,18 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 				pw = new BufferedWriter(new FileWriter((String.valueOf(x.getCodigoSocio()+30000))+".txt",true));
 			} catch (IOException e) {
                System.out.println(">> Error al momento de crear los archivos 1104");
+			}finally {
+				if(pw != null) {
+					try {
+						pw.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
-			cboSocio.addItem(""+x.getCodigoSocio());
+			cboSocio.addItem(x.getCodigoSocio());
 		}
+	  
 	}
 	
 	void AgregarProductos(){
@@ -520,7 +523,7 @@ public class JDialogConsumo extends JDialog implements ActionListener {
 		}
 	}
 	void NombreSocio(){
-		Socio x = as.BuscarCodigo(Integer.parseInt(String.valueOf(cboSocio.getSelectedItem())));
+		Socio x = as.BuscarCodigoSocio(Integer.parseInt(String.valueOf(cboSocio.getSelectedItem())));
 		if(x != null){
 			txtNombre.setText(x.getNombre());
 		}

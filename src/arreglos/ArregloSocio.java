@@ -28,7 +28,7 @@ public class ArregloSocio {
     	sc.add(x);
     }
     
-    public Socio BuscarCodigo(int cod){
+    public Socio BuscarCodigoSocio(int cod){
     	for(int i=0;i<Tamaño();i++){
     		if(Obtener(i).getCodigoSocio() == cod){
     			return Obtener(i);
@@ -36,7 +36,7 @@ public class ArregloSocio {
     	}
     	return null;
     }
-    public Socio BuscarDni(String dni){
+    public Socio BuscarDniSocio(String dni){
     	for(int i=0;i<Tamaño();i++){
     		if(Obtener(i).getDni().equals(dni)){
     			return Obtener(i);

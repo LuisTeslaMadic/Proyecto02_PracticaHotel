@@ -32,7 +32,6 @@ import arreglos.ArregloIngreso;
 import clases.Bungalow;
 import clases.Hospedaje;
 import clases.Ingreso;
-import com.toedter.components.JSpinField;
 
 public class JDialogHospedaje extends JDialog implements ActionListener, MouseListener {
 	/**
@@ -302,7 +301,7 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 			String horaSalida = CapturarHora();
 			if(horaSalida.matches("(1[0-2]|0?[1-9]):([0-5][0-9])")) {
 			    int codIngr    = CapturarCodigoIngreso();
-			   if(ah.CodigoIngreso(codIngr)==null) {
+			   if(ah.BuscarCodigoIngreso(codIngr)==null) {
 				   int codigoHos  = CapturarCodigoHospedaje();
 				   int numeroBung = CapturarNumeroBungalow();
 				   double costo   = CapturarCosto();
@@ -323,7 +322,7 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 	void Consultar() {
 		if(txtCodigoHospedaje.getText().equals("")) {
 			int cod = CapturarCodigoHospedaje();
-			Hospedaje x = ah.CodigoHospedaje(cod);
+			Hospedaje x = ah.BuscarCodigoHospedaje(cod);
 			if(x != null) {
 				
 			}else {

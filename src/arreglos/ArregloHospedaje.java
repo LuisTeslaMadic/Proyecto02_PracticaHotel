@@ -28,7 +28,7 @@ public class ArregloHospedaje {
 	   hp.add(x);
    }
    
-   public Hospedaje CodigoHospedaje(int cod){
+   public Hospedaje BuscarCodigoHospedaje(int cod){
 	   for(int i=0;i<Tamaño();i++){
 		 Hospedaje  x = Obtener(i);   
 		   if(x.getCodigoHospedaje() == cod){
@@ -38,7 +38,7 @@ public class ArregloHospedaje {
 	 return null;  
    }
    
-   public Hospedaje CodigoIngreso(int cod){
+   public Hospedaje BuscarCodigoIngreso(int cod){
 	   for(int i=0;i<Tamaño();i++){
 		   Hospedaje x = Obtener(i);
 		   if(x.getCodigoIngreso() == cod){

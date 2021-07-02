@@ -430,7 +430,7 @@ public class JDialogSocio extends JDialog implements ActionListener {
 	void Consultar(){
 		try{
 			int cod = CapturarCodigo();
-			Socio x = as.BuscarCodigo(cod);
+			Socio x = as.BuscarCodigoSocio(cod);
 			if(x != null){
 				txtNombre.setText(""+x.getNombre());
 				txtApellido.setText(""+x.getApellido());
@@ -455,7 +455,7 @@ public class JDialogSocio extends JDialog implements ActionListener {
 	    		 if(dni.length() >0){
 	    			 if(dni.length()==8){
 	    				    String telefono = String.valueOf(CapturarTelefono());
-	    				    Socio x = as.BuscarCodigo(cod);
+	    				    Socio x = as.BuscarCodigoSocio(cod);
 	    				 if(telefono.length() == 9){
 	    					 int tel = Integer.parseInt(telefono);
 	    					 x.setNombre(nombre);
@@ -485,7 +485,7 @@ public class JDialogSocio extends JDialog implements ActionListener {
 	void Eliminar(){
 		try{
 			int cod = CapturarCodigo();
-			Socio x = as.BuscarCodigo(cod);
+			Socio x = as.BuscarCodigoSocio(cod);
 			if(x != null){
 				int ok = confirmar("¿ Desea eliminar el registro ?");
 				if(ok == 0){
