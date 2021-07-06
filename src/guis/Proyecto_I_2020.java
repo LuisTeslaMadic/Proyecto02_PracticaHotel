@@ -26,7 +26,6 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 	private JMenu mnMantenimiento;
 	private JMenu mnRegistro;
 	private JMenu mnPago;
-	private JMenu mnReporte;
 	private JMenu mnBoleta;
 	private JMenu mnAyuda;
 	private JMenuItem mntmSocio;
@@ -37,10 +36,6 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 	private JMenuItem mntmHospedaje;
 	private JMenuItem mntmIngresosConsumos;
 	private JMenuItem mntmHospedajes;
-	private JMenuItem mntmNewMenuItem_2;
-	private JMenuItem mntmNewMenuItem_3;
-	private JMenuItem mntmNewMenuItem_4;
-	private JMenuItem mntmNewMenuItem_5;
 	private JMenuItem mntmGenerarBoleta;
 
 	/**
@@ -66,7 +61,7 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 		setResizable(false);
 		setTitle("Tienda 1.0");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 763, 421);
+		setBounds(100, 100, 652, 503);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -77,7 +72,7 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 		menuProyecto.setMargin(new Insets(0, 0, 0, 0));
 		menuProyecto.setBackground(Color.WHITE);
 		menuProyecto.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 12));
-		menuProyecto.setBounds(0, 0, 757, 43);
+		menuProyecto.setBounds(0, 0, 640, 43);
 		contentPane.add(menuProyecto);
 		
 		mnArchivo = new JMenu("Archivo");
@@ -164,25 +159,6 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 		mntmHospedajes.addActionListener(this);
 		mntmHospedajes.setFont(new Font("Segoe UI", Font.ITALIC, 13));
 		mnPago.add(mntmHospedajes);
-		
-		mnReporte = new JMenu("Reporte");
-		mnReporte.setBorder(BorderFactory.createCompoundBorder(mnReporte.getBorder(),BorderFactory.createEmptyBorder(0, 10, 0,10)));
-		mnReporte.setIcon(new ImageIcon(Proyecto_I_2020.class.getResource("/imagenes/clipboard.png")));
-		mnReporte.setForeground(Color.DARK_GRAY);
-		mnReporte.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
-		menuProyecto.add(mnReporte);
-		
-		mntmNewMenuItem_2 = new JMenuItem("Ingresos y consumos pendientes");
-		mnReporte.add(mntmNewMenuItem_2);
-		
-		mntmNewMenuItem_3 = new JMenuItem("Ingresos y consumos pagados");
-		mnReporte.add(mntmNewMenuItem_3);
-		
-		mntmNewMenuItem_4 = new JMenuItem("Hospedajes pendientes");
-		mnReporte.add(mntmNewMenuItem_4);
-		
-		mntmNewMenuItem_5 = new JMenuItem("Hospedajes pagados");
-		mnReporte.add(mntmNewMenuItem_5);
 		
 		mnBoleta = new JMenu("Boleta");
 		mnBoleta.setBorder(BorderFactory.createCompoundBorder(mnBoleta.getBorder(),BorderFactory.createEmptyBorder(0, 10, 0,10)));
