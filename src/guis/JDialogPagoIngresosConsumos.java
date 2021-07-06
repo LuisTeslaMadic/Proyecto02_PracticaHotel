@@ -117,6 +117,8 @@ public class JDialogPagoIngresosConsumos extends JDialog implements ActionListen
 			List<Consumo> lc = ac.CargarConsumo(objIngreso.getCodigoSocio());
       		/*Reporte Consumo*/
 			
+			
+			
 			HashMap<String,Object> param = new HashMap<>();
 			param.put("RutaImagen", JDialogPagoHospedaje.class.getResource("/imagenes/LogoHilton.jpg"));
 			param.put("CodigoSocio", objSocio.getCodigoSocio());

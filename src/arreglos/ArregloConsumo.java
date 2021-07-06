@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import clases.Consumo;
 
 
@@ -67,7 +69,8 @@ public class ArregloConsumo {
 	      //txtTotal.setText(Formatos.FormatoMoneda(AcTotal));
 			br.close();
 		}catch(IOException e) {
-			System.out.println(">> Error al abrir el archivo "+e);
+			JOptionPane.showMessageDialog(null, "El socio no tiene consumos");
+			System.out.println(">> No existen consumos"+e);
 		}
 	 return ac;	
 		

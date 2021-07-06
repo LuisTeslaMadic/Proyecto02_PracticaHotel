@@ -270,7 +270,9 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 	void VolcadoCodigosIngreso() {
 		for(int i=0;i<ai.Tamaño();i++) {
 			Ingreso x = ai.Obtener(i);
-			cboIngreso.addItem(x.getCodigoIngreso());;
+			if(x.getEstado() == 0) {
+			  cboIngreso.addItem(x.getCodigoIngreso());
+			}
 		}
 	}
 	protected void actionPerformedCboCategoriaBungalow(ActionEvent e) {
@@ -301,7 +303,8 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 			String horaSalida = CapturarHora();
 			if(horaSalida.matches("(1[0-2]|0?[1-9]):([0-5][0-9])")) {
 			    int codIngr    = CapturarCodigoIngreso();
-			   if(ah.BuscarCodigoIngreso(codIngr)==null) {
+			    Hospedaje objHospedaje = ah.BuscarCodigoHospedaje(codIngr);
+			   if(objHospedaje == null) {
 				   int codigoHos  = CapturarCodigoHospedaje();
 				   int numeroBung = CapturarNumeroBungalow();
 				   double costo   = CapturarCosto();
@@ -317,6 +320,7 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 			}
 		}catch(Exception e) {
 			mensaje("Debe colocar la fecha con el formato dd/mm/yyyy");
+			e.printStackTrace();
 		}
 	}
 	void Consultar() {
@@ -377,7 +381,7 @@ public class JDialogHospedaje extends JDialog implements ActionListener, MouseLi
 	
 	String FormatoFecha(Date fecha) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		return sdf.format(fecha);
+		return sdf.format(fecha)+"";
 	}
 	
     String EstadoLetras(int estado) {
