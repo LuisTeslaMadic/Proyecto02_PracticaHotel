@@ -31,7 +31,6 @@ import arreglos.ArregloSocio;
 import clases.Ingreso;
 import clases.Producto;
 import clases.Socio;
-import javax.swing.DefaultComboBoxModel;
 
 public class JDialogConsumo extends JDialog implements ActionListener {
 	private JLabel lblCodigoConsumo;

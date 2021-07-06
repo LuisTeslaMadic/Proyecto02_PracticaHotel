@@ -6,13 +6,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Libreria.Formatos;
 import clases.Consumo;
 
 
 public class ArregloConsumo {
     
 	private ArrayList<Consumo> cs;
+	private static double AcTotal;
+	
+	static {
+		setAcTotal(0);
+	}
+	
+	
 	
 	public ArregloConsumo(){
 		cs = new ArrayList<Consumo>();
@@ -40,7 +46,7 @@ public class ArregloConsumo {
 		String linea ,producto;
 		int cantidad;
 		String[] s = null ;
-		double precio;
+		double precio,total;
 		try {
 			br = new BufferedReader(new FileReader((CodigoSocio+30000)+".txt"));
 			while((linea = br.readLine()) != null) {
@@ -49,10 +55,12 @@ public class ArregloConsumo {
 					producto    = s[2];
 					precio      = Double.parseDouble(s[3]);
 					cantidad    = Integer.parseInt(s[4]);
+					total       = Double.parseDouble(s[5]);
 					Consumo x = new Consumo();
 					x.setProducto(producto);
 					x.setCantidad(cantidad);
 					x.setPrecio(precio);
+					AcTotal+=total;
 					ac.add(x);
 			 }
 			}
@@ -64,4 +72,23 @@ public class ArregloConsumo {
 	 return ac;	
 		
 	}
+   
+    public Consumo Buscar(int CodigoSocio){
+		for(int i=0;i<Tamaño();i++){
+		 Consumo x = Obtener(i);	
+			if(x.getCodigoSocio()== CodigoSocio){
+				return x;
+			}
+		}
+	 return null;	
+	}
+
+	public static double getAcTotal() {
+		return AcTotal;
+	}
+
+	public static void setAcTotal(double acTotal) {
+		AcTotal = acTotal;
+	}
+
 }

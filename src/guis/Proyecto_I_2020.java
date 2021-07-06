@@ -1,24 +1,20 @@
 package guis;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
-import java.awt.Color;
-import javax.swing.JButton;
-import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 
 public class Proyecto_I_2020 extends JFrame implements ActionListener {
@@ -45,6 +41,7 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 	private JMenuItem mntmNewMenuItem_3;
 	private JMenuItem mntmNewMenuItem_4;
 	private JMenuItem mntmNewMenuItem_5;
+	private JMenuItem mntmGenerarBoleta;
 
 	/**
 	 * Launch the application.
@@ -194,6 +191,11 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 		mnBoleta.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 13));
 		menuProyecto.add(mnBoleta);
 		
+		mntmGenerarBoleta = new JMenuItem("Generar boleta");
+		mntmGenerarBoleta.addActionListener(this);
+		mntmGenerarBoleta.setFont(new Font("Segoe UI", Font.ITALIC, 13));
+		mnBoleta.add(mntmGenerarBoleta);
+		
 		mnAyuda = new JMenu("Ayuda");
 		mnAyuda.setBorder(BorderFactory.createCompoundBorder(mnAyuda.getBorder(),BorderFactory.createEmptyBorder(0, 10, 0,10)));
 		mnAyuda.setIcon(new ImageIcon(Proyecto_I_2020.class.getResource("/imagenes/help-circle.png")));
@@ -203,6 +205,9 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 		
 	}
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == mntmGenerarBoleta) {
+			actionPerformedMntmGenerarBoleta(arg0);
+		}
 		if (arg0.getSource() == mntmHospedajes) {
 			actionPerformedMntmHospedajes(arg0);
 		}
@@ -271,6 +276,11 @@ public class Proyecto_I_2020 extends JFrame implements ActionListener {
 	}
 	protected void actionPerformedMntmHospedajes(ActionEvent arg0) {
 		JDialogPagoHospedaje x = new JDialogPagoHospedaje();
+		x.setLocationRelativeTo(this);
+		x.setVisible(true);
+	}
+	protected void actionPerformedMntmGenerarBoleta(ActionEvent arg0) {
+		JDialogBoleta x = new JDialogBoleta();
 		x.setLocationRelativeTo(this);
 		x.setVisible(true);
 	}

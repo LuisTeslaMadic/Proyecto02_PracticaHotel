@@ -1,6 +1,3 @@
 30001;10003;Gaseosa - Pepsi Cola;2.5;5;12.5
 30002;10003;Tragos-Don cesilio;100.0;10;1000.0
 30003;10003;Galletas - Soda;0.5;5;2.5
-
-30004;10003;Galletas - Soda;0.5;5;2.5
-30005;10003;Tragos-Don cesilio;100.0;2;200.0

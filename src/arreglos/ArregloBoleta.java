@@ -78,7 +78,7 @@ public class ArregloBoleta {
      		}
     		bf.close();
     	}catch(Exception e){
-    		JOptionPane.showMessageDialog(null, this, "Ah ocurrido un error ups!!", 0);
+    		//JOptionPane.showMessageDialog(null, this, "Ah ocurrido un error ups!!", 0);
     	}
     }
     

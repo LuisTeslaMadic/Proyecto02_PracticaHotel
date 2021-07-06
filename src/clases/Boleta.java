@@ -1,44 +1,39 @@
 package clases;
 
 public class Boleta {
-    private int    CodigoBoleta;
-    private int    CodigoIngreso;
-    private double PagoTotal;
+    private int    codigoBoleta;
+    private int    codigoIngreso;
+    private double pagoTotal;
     
-    public Boleta(int codBo,int codIn,double pagTo){
-    	this.CodigoBoleta  = codBo;
-    	this.CodigoIngreso = codIn;
-    	this.PagoTotal     = pagTo;
+	public Boleta(int codBo,int codIn,double pagTo){
+    	this.codigoBoleta  = codBo;
+    	this.codigoIngreso = codIn;
+    	this.pagoTotal     = pagTo;
     }
-    
+	
 	public int getCodigoBoleta() {
-		return CodigoBoleta;
+		return codigoBoleta;
 	}
 
 	public void setCodigoBoleta(int codigoBoleta) {
-		CodigoBoleta = codigoBoleta;
+		this.codigoBoleta = codigoBoleta;
 	}
 
 	public int getCodigoIngreso() {
-		return CodigoIngreso;
+		return codigoIngreso;
 	}
 
 	public void setCodigoIngreso(int codigoIngreso) {
-		CodigoIngreso = codigoIngreso;
+		this.codigoIngreso = codigoIngreso;
 	}
 
 	public double getPagoTotal() {
-		return PagoTotal;
+		return pagoTotal;
 	}
 
 	public void setPagoTotal(double pagoTotal) {
-		PagoTotal = pagoTotal;
+		this.pagoTotal = pagoTotal;
 	}
-    
-     
-    
-    
-    
     
     
 }

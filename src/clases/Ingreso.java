@@ -1,8 +1,8 @@
 package clases;
 
 public class Ingreso {
-    private int    CodigoIngreso;
-    private int    CodigoSocio;
+    private int    codigoIngreso;
+	private int    CodigoSocio;
     private String FechaIngreso;
     private String HoraIngreso;
     private int    NumeroInvitados;
@@ -11,7 +11,7 @@ public class Ingreso {
     
     public Ingreso(int codIn,int codSoc,String fechIn,String horaIn,int numIn,double cosIn ,
     		      int estado){
-    	this.CodigoIngreso   = codIn;
+    	this.codigoIngreso   = codIn;
     	this.CodigoSocio     = codSoc;
     	this.FechaIngreso    = fechIn;
     	this.HoraIngreso     = horaIn;
@@ -20,14 +20,14 @@ public class Ingreso {
     	this.Estado          = estado;
     	
     }
-
-	public int getCodigoIngreso() {
-		return this.CodigoIngreso;
+    public int getCodigoIngreso() {
+		return codigoIngreso;
 	}
 
 	public void setCodigoIngreso(int codigoIngreso) {
-		this.CodigoIngreso = codigoIngreso;
+		this.codigoIngreso = codigoIngreso;
 	}
+
 
 	public int getCodigoSocio() {
 		return this.CodigoSocio;

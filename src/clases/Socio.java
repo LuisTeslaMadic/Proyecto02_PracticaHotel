@@ -1,26 +1,42 @@
 package clases;
 
 public class Socio {
-    private int    CodigoSocio;
+    private int    codigoSocio;
     private String Nombre;
     private String Apellido;
-    private String Dni;
+    private String nombreApellido;
+    private String dni;
     private int    Telefono;
     
     public Socio(int cod,String nom,String ape,String dni,int tel){
-    	this.CodigoSocio = cod;
+    	this.codigoSocio = cod;
     	this.Nombre      = nom;
     	this.Apellido    = ape;
-    	this.Dni         = dni;
+    	this.dni         = dni;
     	this.Telefono    = tel;
+    	
     }
 
+	
+
 	public int getCodigoSocio() {
-		return this.CodigoSocio;
+		return codigoSocio;
 	}
 
+
+
 	public void setCodigoSocio(int codigoSocio) {
-		this.CodigoSocio = codigoSocio;
+		this.codigoSocio = codigoSocio;
+	}
+
+
+
+	public String getNombreApellido() {
+		return Nombre+" "+Apellido;
+	}
+
+	public void setNombreApellido(String nombreApellido) {
+		this.nombreApellido = nombreApellido;
 	}
 
 	public String getNombre() {
@@ -40,11 +56,11 @@ public class Socio {
 	}
 
 	public String getDni() {
-		return this.Dni;
+		return this.dni;
 	}
 
 	public void setDni(String dni) {
-		this.Dni = dni;
+		this.dni = dni;
 	}
 
 	public int getTelefono() {

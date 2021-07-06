@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteIngresosConsumos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="13"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\iReport-4.5.0\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="CodigoSocio" class="java.lang.String"/>
+	<parameter name="NombreApellido" class="java.lang.String"/>
+	<parameter name="Dni" class="java.lang.String"/>
+	<parameter name="CostoIngreso" class="java.lang.String"/>
+	<parameter name="RutaImagen" class="java.lang.String"/>
+	<parameter name="Deuda" class="java.lang.String"/>
+	<field name="cantidad" class="java.lang.String"/>
+	<field name="precio" class="java.lang.String"/>
+	<field name="total" class="java.lang.String"/>
+	<field name="producto" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="111" splitType="Stretch">
+			<staticText>
+				<reportElement x="186" y="11" width="282" height="51" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="38" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Hotel Hilton]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="91" width="149" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[https://www.hiltonhotels.com/es_XM/peru/]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="91" width="85" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Pagina web   :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="186" y="71" width="85" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Telefono        :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="71" width="149" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[978456231]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="186" height="111"/>
+				<imageExpression><![CDATA[$P{RutaImagen}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="118" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="14" width="88" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Codigo Socio :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="48" width="116" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ Nombre y apellido :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="84" width="41" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Dni :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="14" width="111" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Costo por ingreso :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="48" width="111" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de emisión :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="372" y="48" width="96" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="14" width="88" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CodigoSocio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="48" width="114" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="12" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NombreApellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="51" y="84" width="104" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{Dni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="14" width="111" height="20" forecolor="#333333"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CostoIngreso}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="46" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="555" height="46" backcolor="#333333"/>
+			</frame>
+			<staticText>
+				<reportElement x="10" y="13" width="51" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Cantidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="98" y="13" width="100" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Descripción]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="261" y="13" width="58" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Precio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="13" width="48" height="20" forecolor="#FFFFFF"/>
+				<textElement>
+					<font fontName="Segoe UI" size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="10" y="9" width="63" height="20" forecolor="#333333"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="261" y="9" width="100" height="20" forecolor="#333333"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="420" y="9" width="71" height="20" forecolor="#333333"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="98" y="9" width="100" height="20" forecolor="#333333"/>
+				<textElement>
+					<font isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="22" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="261" y="0" width="121" height="22" backcolor="#333333"/>
+			</frame>
+			<staticText>
+				<reportElement x="261" y="0" width="121" height="22" forecolor="#FFFFFF"/>
+				<textElement>
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Deuda total :]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
